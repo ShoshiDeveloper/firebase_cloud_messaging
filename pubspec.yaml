@@ -1,6 +1,6 @@
 name: firebase_messaging_backend_service
 description: Package for send messages from Firebase to Users
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/ShoshiDeveloper/firebase_cloud_messaging
 homepage: https://pub.dev/packages/firebase_messaging_backend_service
 
