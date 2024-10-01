@@ -1,0 +1,1 @@
+enum NotificationVisibility { VISIBILITY_UNSPECIFIED, PRIVATE, PUBLIC, SECRET }
