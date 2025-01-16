@@ -24,7 +24,7 @@ class FirebaseCloudMessagingService {
     var scopes = ["https://www.googleapis.com/auth/firebase.messaging"];
     var client = http.Client();
     _accessCredentials = await obtainAccessCredentialsViaServiceAccount(accountCredentials, scopes, client);
-    
+
     client.close();
     print(_accessCredentials?.accessToken.data);
     print(_accessCredentials?.refreshToken);
@@ -43,16 +43,14 @@ class FirebaseCloudMessagingService {
 
     final url = 'https://fcm.googleapis.com/v1/projects/$projectId/messages:send';
     final response = await http.post(Uri.parse(url),
-      headers: {"Content-Type": "application/json", "Authorization": "Bearer ${_accessCredentials!.accessToken.data}"},
-      body: json.encode(sendObject.toJson())
-    );
+        headers: {"Content-Type": "application/json", "Authorization": "Bearer ${_accessCredentials!.accessToken.data}"},
+        body: json.encode({"message": sendObject.toJson()}));
     final successful = response.statusCode == 200;
     print("successful: ${response.body}");
     print("successful: $successful");
-    final serverResult =
-        CloudMessagingResponse(successful, response.statusCode, successful ? Message.fromJson(json.decode(response.body)) : Message(notification: Notification()), response.reasonPhrase);
+    final serverResult = CloudMessagingResponse(successful, response.statusCode,
+        successful ? Message.fromJson(json.decode(response.body)) : Message(notification: Notification()), response.reasonPhrase);
     print(serverResult);
     return serverResult;
   }
-
 }
